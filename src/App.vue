@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <v-content>
-      <Mapa/>
+      <Mapa :lat="latitude" :long="longitude">
+      </Mapa>
     </v-content>
   </v-app>
 </template>
@@ -15,9 +16,18 @@ export default {
   components: {
     Mapa,
   },
-
+  mounted() {
+    if(navigator.geolocation) navigator.geolocation.getCurrentPosition(this.getPosition)
+  },
   data: () => ({
-    //
+    latitude: null,
+    longitude: null,
   }),
+  methods: {
+    getPosition(position) {
+      this.latitude = position.coords.latitude
+      this.longitude = position.coords.longitude
+    }
+  }
 };
 </script>
