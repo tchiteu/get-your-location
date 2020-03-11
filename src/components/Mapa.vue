@@ -1,11 +1,5 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col md12>
-        <iframe class="mapa" :src="`https://www.openstreetmap.org/export/embed.html?bbox=${long},${lat},${long},${lat}&amp;layer=mapnik&amp;marker=${lat},${long}`"></iframe>
-      </v-col>      
-    </v-row>
-  </v-container>
+  <iframe :height="alturaTela" class="mapa" :src="`https://www.openstreetmap.org/export/embed.html?bbox=${long},${lat},${long},${lat}&amp;layer=mapnik&amp;marker=${lat},${long}`"></iframe>
 </template>
 
 <script>
@@ -16,15 +10,17 @@
       lat: Number,
       long: Number,
     },
-    data: () => ({
-      
-    }),
+    computed: {
+      alturaTela() {
+        return window.screen.height
+      }
+    }
   }
 </script>
 
 <style>
   .mapa {
     width: 100%;
-    min-height: 400px;
+    border: none;
   }
 </style>
